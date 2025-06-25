@@ -53,7 +53,7 @@ class CommandInterface {
     }
     async deferReply(data) {
         if (this.isInteraction) {
-            this.msg = await this.interaction.deferReply({ fetchReply: true });
+            this.msg = await this.interaction.deferReply();
             return this.msg;
         } else {
             this.msg = await this.message.reply(data || "Sending command...");
