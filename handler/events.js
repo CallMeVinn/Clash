@@ -1,6 +1,8 @@
 const { readdirSync } = require("node:fs");
 
 module.exports = (client) => {
+    const amount = [];
+    
     console.log("[Handler] Open events ...");
     
     const folders = readdirSync("./events");
@@ -17,8 +19,10 @@ module.exports = (client) => {
                     client.on(name, event.bind(null, client));
                 }
             }
+            
+            amount.push(file);
         }
     }
     
-    console.log("[Handler] Loaded events ✅")
+    console.log("[Handler] Loaded "+(amount.length+1)+" events file ✅")
 }

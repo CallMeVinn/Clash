@@ -14,7 +14,7 @@ module.exports = (client, message) => {
     if (missingPermissions.length > 0) {
         const content = `The bot doesn't have one of these permissions \`${missingPermissions.join(", ")}\`.\nPlease double check them in your server role & channel settings.\n\nServer: **${message.guild.name}**`;
 
-        const dmChannel = message.author.dmChannel == null ? await message.author.createDM() : message.author.dmChannel;
+        const dmChannel = message.author.dmChannel || await message.author.createDM();
 
         return dmChannel.send({ content });
     }
