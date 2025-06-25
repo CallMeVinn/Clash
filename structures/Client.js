@@ -21,10 +21,7 @@ class BotClient extends Client {
         this.on("error", console.error);
         this.on("warn", console.info);
         
-        this.coc = new ClashClient({
-            email: process.env.ClashEmail,
-            password: process.env.ClashPassword
-        });
+        this.coc = new ClashClient();
         
         this.app_commands = new Collection();
         this.commands = new Collection();
@@ -37,6 +34,12 @@ class BotClient extends Client {
     
     async start() {
         super.login(this.config.Token);
+        
+        this.coc.on("error", console.error);
+        this.coc.login({
+            email: process.env.ClashEmail,
+            password: process.env.ClashPassword
+        });
     }
 }
 

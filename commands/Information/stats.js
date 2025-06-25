@@ -67,7 +67,7 @@ module.exports = {
         
         const embeds = [botInfoEmbed, systemInfoEmbed];
         
-        await i.editReply({ content: null, embeds: [botInfoEmbed], components: [new ActionRowBuilder().addComponents(buttons)] });
+        await i.editReply({ embeds: [botInfoEmbed], components: [new ActionRowBuilder().addComponents(buttons)] });
         
         await clickButtonCollector(i, embeds, buttons);
     }

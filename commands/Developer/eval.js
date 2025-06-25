@@ -34,7 +34,7 @@ async function generate(i, code, embed) {
         .setTitle("Response[CODE]")
         .setDescription(`\`\`\`js\n${evaled}\`\`\``);
     
-    await i.editReply({ content: null, embeds: [embed] });
+    await i.editReply({embeds: [embed] });
     return;
 }
 
@@ -43,7 +43,7 @@ async function failed(i, embed, error) {
         .setTitle("Response[ERROR]")
         .setDescription(`\`\`\`js\n${clean(error)}\`\`\``);
     
-    await i.editReply({ content: null, embeds: [embed] });
+    await i.editReply({embeds: [embed] });
     return;
 }
 

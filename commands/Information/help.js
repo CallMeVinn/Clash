@@ -48,7 +48,7 @@ async function helpMenu(i) {
         );
     }
     
-    await i.editReply({ content: null, embeds: [embed], components: [new ActionRowBuilder().addComponents(buttons)] });
+    await i.editReply({ embeds: [embed], components: [new ActionRowBuilder().addComponents(buttons)] });
     
     await clickButtonCollector(i, embed, buttons);
     return;
@@ -61,7 +61,7 @@ async function helpCommands(i) {
     
     const embed = new EmbedBuilder();
     
-    if (!command) return await i.editReply({ content: null, embeds: [embed.setColor("Red").setDescription(`Command with name \`${query}\` not found!`)], flags: [MessageFlags.Ephemeral] });
+    if (!command) return await i.editReply({ embeds: [embed.setColor("Red").setDescription(`Command with name \`${query}\` not found!`)], flags: [MessageFlags.Ephemeral] });
     
     embed.setColor(i.config.Color)
         .setTitle(command.data.name)
@@ -71,7 +71,7 @@ async function helpCommands(i) {
         embed.addFields({ name: "Arguments", value: `${command.data.options.map(o => `[\`${o.name}\`] - ${o.description}`)}` });
     }
     
-    await i.editReply({ content: null, embeds: [embed] });
+    await i.editReply({ embeds: [embed] });
     return;
 }
 

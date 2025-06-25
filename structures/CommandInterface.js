@@ -44,6 +44,7 @@ class CommandInterface {
         }
     }
     async editReply(data) {
+        if (!data?.content) data.content = null;
         if (this.isInteraction) {
             if (this.msg) this.msg = this.interaction.editReply(data);
             return this.msg;
