@@ -1,0 +1,14 @@
+{
+    "name": "clash",
+    "version": "0.0.1",
+    "description": "Clash of Clans Discord Bot",
+    "main": "index.js",
+    "scripts": {
+        "start": "node ."
+    },
+    "dependencies": {
+        "canvacord": "^6.0.2",
+        "clashofclans.js": "^3.3.22",
+        "discord.js": "^14.20.0"
+    }
+}
