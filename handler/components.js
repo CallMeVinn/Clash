@@ -6,7 +6,7 @@ module.exports = (client) => {
     const folders = readdirSync("./components");
     
     for (const folder of folders) {
-        const files = readdirSync("./handler/"+folder);
+        const files = readdirSync("./components/"+folder);
         
         for (const file of files) {
             const componen = require("../components/"+folder+"/"+file);
