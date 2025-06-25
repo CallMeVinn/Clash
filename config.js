@@ -8,5 +8,5 @@ module.exports = {
     
     Discord: "https://discord.gg",
     Invite: "https://discord.gg",
-    Webiste: "https://clash.web.id",
+    Website: "https://clash.web.id",
 }
