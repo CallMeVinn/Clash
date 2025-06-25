@@ -3,15 +3,15 @@ const { readdirSync } = require("node:fs");
 module.exports = (client) => {
     const data = [];
     
-    console.log("[Handler] Open app_commands ...");
+    console.log("[Handler] Open app-commands ...");
     
-    const app_folders = readdirSync("./app_commands");
+    const app_folders = readdirSync("./app-commands");
     
     for (const folder of app_folders) {
-        const files = readdirSync("./app_commands/"+folder);
+        const files = readdirSync("./app-commands/"+folder);
         
         for (const file of files) {
-            const command = require("../app_commands/"+folder+"/"+file);
+            const command = require("../app-commands/"+folder+"/"+file);
             command.category = folder;
             
             client.app_commands.set(command.data.name, command);
@@ -19,7 +19,7 @@ module.exports = (client) => {
         }
     }
     
-    console.log("[Handler] Loaded "+client.app_commands.size+" app_commands ✅");
+    console.log("[Handler] Loaded "+client.app_commands.size+" app-commands ✅");
     
     console.log("[Handler] Open commands ...");
     
