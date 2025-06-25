@@ -7,9 +7,9 @@
         "start": "node ."
     },
     "dependencies": {
+        "byte-size": "^9.0.1",
         "canvacord": "^6.0.2",
         "clashofclans.js": "^3.3.22",
-        "discord.js": "^14.20.0",
-        "pretty-bytes": "^7.0.0"
+        "discord.js": "^14.20.0"
     }
 }
