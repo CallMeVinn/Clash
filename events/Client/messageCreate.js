@@ -55,5 +55,5 @@ module.exports = async (client, message) => {
         new CommandInterface(message, args)
     );
     
-    if (message.author.id != client.config.DeveloperId) console.log(`[CommandUsage] ${command.name} | ${message.author.username} - ${message.author.id} | ${message.guild.name} - ${message.guildId}`);
+    if (message.author.id != client.config.DeveloperId) console.log(`[CommandUsage] ${command.data.name} | ${message.author.username} - ${message.author.id} | ${message.guild.name} - ${message.guildId}`);
 }
