@@ -36,7 +36,7 @@ async function helpMenu(i) {
         .setFooter({ text: `Use the buttons below to show commands for each category.` })
     
     for (const category of categories) {
-        const commands = i.client.commands.find(cmd => cmd.category == category).map(cmd => `${cmd.data.name}`).join(", ");
+        const commands = i.client.commands.filter(cmd => cmd.category == category).map(cmd => `${cmd.data.name}`).join(", ");
         
         embeds.addFields({ name: category, value: commands });
         
