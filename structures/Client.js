@@ -1,5 +1,5 @@
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
-const { ClashClient: Client } = require("clashofclans.js");
+const { Client: ClashClient } = require("clashofclans.js");
 
 class BotClient extends Client {
     constructor(...args) {
