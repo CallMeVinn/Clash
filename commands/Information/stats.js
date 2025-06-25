@@ -35,6 +35,9 @@ module.exports = {
         
         const realUptime = convertMs({ days, hours, minutes, seconds });
         
+        const RAMUsed = bs(os.totalmem()-os.freemem());
+        const RAMTotal = bs(os.totalmem());
+        
         const systemInfoEmbed = new EmbedBuilder()
             .setColor(i.config.Color)
             .setTitle("System Information")
@@ -46,7 +49,7 @@ module.exports = {
                 { name: "CPU", value: os.cpus()[0].model, inline: true },
                 { name: "CPU Load", value: `${os.loadavg()[0]}%`, inline: true },
                 { name: "Cores", value: os.cpus().length.toString(), inline: true },
-                { name: "RAM Usage", value: `${bs(os.totalmem()-os.freemem())} / ${bs(os.totalmem())}`, inline: true },
+                { name: "RAM Usage", value: `${RAMUsed.value}${RAMUsed.unit} / ${RAMTotal.value}${RAMTotal.unit}`, inline: true },
                 { name: `System Uptime`, value: `<t:${Math.round((Date.now()-realUptime)/1000)}:R>`, inline: true }
             );
         
