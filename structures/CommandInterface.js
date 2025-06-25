@@ -16,6 +16,7 @@ class CommandInterface {
         
         this.client = data.client;
         this.config = data.client.config;
+        this.coc = data.client.coc;
         
         this.setArgs(args);
     }
@@ -35,7 +36,7 @@ class CommandInterface {
     }
     async reply(data) {
         if (this.isInteraction) {
-            this.msg = this.interaction.reply(data);
+            this.msg = await this.interaction.reply(data);
             return this.msg;
         } else {
             this.msg = await this.message.reply(data);
@@ -44,10 +45,10 @@ class CommandInterface {
     }
     async editReply(data) {
         if (this.isInteraction) {
-            if (this.msg) this.msg = await this.interaction.editReply(data);
+            if (this.msg) this.msg = this.interaction.editReply(data);
             return this.msg;
         } else {
-            if (this.msg) this.msg = await this.msg.edit(data);
+            if (this.msg) this.msg = this.msg.edit(data);
             return this.msg;
         }
     }

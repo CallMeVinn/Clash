@@ -30,6 +30,7 @@ module.exports = (client) => {
         
         for (const file of files) {
             const command = require("../commands/"+folder+"/"+file);
+            command.aliases = command.aliases || [];
             command.category = folder;
             
             client.commands.set(command.data.name, command);
