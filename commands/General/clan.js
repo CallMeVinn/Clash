@@ -39,7 +39,7 @@ module.exports = {
         
         const clan = await i.coc.getClan(query);
 
-        embed.setColor(i.client.Color)
+        embed.setColor(i.config.Color)
             .setTitle(clan.name)
             .setURL(clan.shareLink)
             .setDescription(clan.description)

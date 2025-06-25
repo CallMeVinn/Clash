@@ -39,7 +39,7 @@ module.exports = {
         
         const player = await i.coc.getPlayer(query);
 
-        embed.setColor(i.client.Color)
+        embed.setColor(i.config.Color)
             .setTitle(player.name)
             .setURL(player.shareLink)
             .setThumbnail(player.league.icon.url)
