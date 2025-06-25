@@ -9,7 +9,7 @@ module.exports = {
         description: "Sending help commands list",
         options: [{
             type: 3,
-            name: "commands",
+            name: "command-name",
             description: "Input commands name",
         }],
     },
