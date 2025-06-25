@@ -19,5 +19,5 @@ module.exports = (client) => {
         }
     }
     
-    console.log("[Handler] Loaded "+(amount.length+1)+" components file ✅");
+    console.log("[Handler] Loaded "+(amount.length)+" components file ✅");
 }

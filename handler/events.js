@@ -24,5 +24,5 @@ module.exports = (client) => {
         }
     }
     
-    console.log("[Handler] Loaded "+(amount.length+1)+" events file ✅")
+    console.log("[Handler] Loaded "+(amount.length)+" events file ✅")
 }

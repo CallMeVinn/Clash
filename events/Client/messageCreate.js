@@ -1,7 +1,7 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require("discord.js");
 const CommandInterface = require("../../structures/CommandInterface.js");
 
-module.exports = (client, message) => {
+module.exports = async (client, message) => {
     if (message.author.bot || !message.guild) return;
 
     const botPermissions = ["ViewChannel", "SendMessages", "EmbedLinks"];
