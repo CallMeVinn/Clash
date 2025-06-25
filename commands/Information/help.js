@@ -113,7 +113,7 @@ async function clickButtonCollector(i, embed, buttons) {
             .setColor(i.config.Color)
             .setTitle(`${category} [${commands.size}]`)
             .setDescription(commands.map(c => `\`${c.data.name}\` - ${c.data.description}`).join("\n"))
-            .setFooter({ text: `Use the button below to switch.` });
+            .setFooter({ text: `Use the buttons below to switch.` });
 
         iButtons = iButtons.map(
             button => {
