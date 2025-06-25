@@ -1,4 +1,4 @@
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, EmbedBuilder, MessageFlags } = require("discord.js");
 const { version } = require("../../package.json");
 
 const os = require("node:os");
@@ -68,5 +68,50 @@ module.exports = {
         const embeds = [botInfoEmbed, systemInfoEmbed];
         
         await i.editReply({ content: null, embeds: [botInfoEmbed], components: [new ActionRowBuilder().addComponents(buttons)] });
+        
+        await clickButtonCollector(i, embeds, buttons);
     }
+}
+
+async function clickButtonCollector(i, embeds, buttons) {
+    const message = await i.fetchReply();
+        if (!message) return i.msg.edit({ components: [] });
+        
+        const collector = message.createMessageComponentCollector({
+            componentType: ComponentType.Button,
+            time: 60000*3,
+            filter: (interaction) => {
+                if (interaction.user.id != i.author.id) {
+                    interaction.reply({ content: "This button is not for you!", flags: [MessageFlags.Ephemeral] });
+                    return false;
+                } else return true;
+            }
+        });
+        
+        collector.on("collect", async(interaction) => {
+            if (!interaction.deferred) await interaction.deferUpdate();
+            buttons.forEach(button => button.setStyle(ButtonStyle.Primary).setDisabled(false));
+            let page = 0;
+            switch(interaction.customId) {
+                case buttons[0].data.custom_id: {
+                    buttons[0].setStyle(ButtonStyle.Secondary).setDisabled(true);
+                    break;
+                }
+                case buttons[1].data.custom_id: {
+                    page += 1;
+                    buttons[1].setStyle(ButtonStyle.Secondary).setDisabled(true);
+                    break;
+                }
+                default:
+                    break;
+            }
+            
+            await interaction.editReply({ embeds: [embeds[page]], components: [new ActionRowBuilder().addComponents(buttons)] });
+            collector.resetTimer({ time: 60000*5 });
+        });
+        
+        collector.on("end", () => {
+            if (!message && !message?.channel?.messages.cache.get(message.id)) return;
+            message.edit({ components: [] });
+        });
 }
