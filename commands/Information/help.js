@@ -38,7 +38,7 @@ async function helpMenu(i) {
     for (const category of categories) {
         const commands = i.client.commands.filter(cmd => cmd.category == category).map(cmd => `${cmd.data.name}`).join(", ");
         
-        embeds.addFields({ name: category, value: commands });
+        embed.addFields({ name: category, value: commands });
         
         buttons.push(
             new ButtonBuilder()
