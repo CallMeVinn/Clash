@@ -31,7 +31,7 @@ async function helpMenu(i) {
     const embed = new EmbedBuilder()
         .setColor(i.config.Color)
         .setTitle("Commands List")
-        .setDescription(`Here my commands list, use \`/help [commands]\` for spesific commands information. Join [our discord server](${i.config.Discord}) for more information!`)
+        .setDescription(`Here my commands list, use \`/help [command-name]\` for spesific commands information. Join [our discord server](${i.config.Discord}) for more information!`)
         .setThumbnail(i.guild.iconURL({ forceStatic: true, size: 512 }))
         .setFooter({ text: `Use the buttons below to show commands for each category.` })
     
