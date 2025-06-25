@@ -38,7 +38,9 @@ module.exports = (client) => {
         }
     }
     
-    client.on("ready", () => await client.application.commands.set(data).catch(console.error));
+    client.on("ready", async() => {
+        await client.application.commands.set(data).catch(console.error);
+    });
     
     console.log("[Handler] Loaded "+client.commands.size+" commands ✅");
 }
