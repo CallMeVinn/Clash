@@ -5,7 +5,7 @@ module.exports = {
         type: 2,
         name: "Avatar"
     },
-    execute(interaction) {
+    execute(client, interaction) {
         const user = interaction.targetUser;
         
         interaction.reply({ content: user.displayAvatarURL({ forceStatic: true, size: 2048 }), flags: [MessageFlags.Ephemeral] });

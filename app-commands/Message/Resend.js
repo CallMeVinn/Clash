@@ -5,7 +5,7 @@ module.exports = {
         type: 3,
         name: "Resend"
     },
-    execute(interaction) {
+    execute(client, interaction) {
         interaction.reply({ content: interaction.targetMessage.content, flags: [MessageFlags.Ephemeral] });
         return;
     }
