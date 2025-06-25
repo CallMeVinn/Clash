@@ -68,6 +68,13 @@ class CommandInterface {
             this.msg = await this.message.reply(data);
         }
     }
+    async fetchReply() {
+        if (this.isInteraction) {
+            return this.interaction.fetchReply();
+        } else {
+            return this.msg;
+        }
+    }
     setArgs(args) {
         if (this.isInteraction) {
             this.args = args.map((a) => a.value);
