@@ -9,7 +9,7 @@ module.exports = {
         
         const timestamp = await Date.now();
         
-        await i.editReply(`Pong! **${timestamp - interaction.createdTimestamp}** ms`);
+        await i.editReply(`Pong! **${timestamp - i.createdTimestamp}** ms`);
         return;
     }
 }

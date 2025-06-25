@@ -54,6 +54,6 @@ function clean(code) {
         .replace(/@/g, "@" + String.fromCharCode(8203));
     }
     else {
-        return inspect(code, { depth: 0 });
+        return util.inspect(code, { depth: 0 });
     }
 };
