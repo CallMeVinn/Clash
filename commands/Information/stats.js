@@ -21,7 +21,7 @@ module.exports = {
             .addFields(
                 { name: "Version", value: version, inline: true },
                 { name: "Guild Count", value: i.client.guilds.cache.size.toLocaleString().replaceAll(",", "."), inline: true },
-                { name: "User Count", value: i.client.users.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString().replaceAll(",", "."), inline: true },
+                { name: "User Count", value: i.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString().replaceAll(",", "."), inline: true },
                 { name: "API Latency", value: `${i.client.ws.ping}ms`, inline: true },
                 { name: "Response Latency", value: `${Date.now() - i.createdAt}ms`, inline: true },
                 { name: "Bot Uptime", value: `<t:${Math.round((Date.now() - (i.client.uptime ?? 0)) / 1000)}:R>`, inline: true }
@@ -67,6 +67,6 @@ module.exports = {
         
         const embeds = [botInfoEmbed, systemInfoEmbed];
         
-        await i.editReply({ embeds: [botInfoEmbed], components: [new ActionRowBuilder().addComponents(buttons)] });
+        await i.editReply({ content: null, embeds: [botInfoEmbed], components: [new ActionRowBuilder().addComponents(buttons)] });
     }
 }

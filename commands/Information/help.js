@@ -1,6 +1,6 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, MessageFlags } = require("discord.js");
 
-const { readdirSync } = require("discord.js");
+const { readdirSync } = require("node:fs");
 
 module.exports = {
     data: {
@@ -68,7 +68,18 @@ async function helpCommands(i) {
     
     const command = i.client.commands.get(query) || i.client.commands.find(c => c.aliases.includes(query));
     
-    if (!command) return await i.editReply({ content: `Command with name \`${query}\` not found!`, flags: [MessageFlags.Ephemeral] });
+    const embed = new EmbedBuilder();
     
+    if (!command) return await i.editReply({ content: null, embeds: [embed.setColor("Red").setDescription(`Command with name \`${query}\` not found!`)], flags: [MessageFlags.Ephemeral] });
     
+    embed.setColor(i.config.Color)
+        .setTitle(command.data.name)
+        .setDescription(command.data.description);
+    
+    if (command.data.options) {
+        embed.addFields({ name: "Arguments", value: `${command.data.options.map(o => `[\`${o.name}\`] - ${o.description}`)}` });
+    }
+    
+    await i.editReply({ content: null, embeds: [embed] });
+    return;
 }
