@@ -10,7 +10,8 @@ module.exports = {
         options: [{
             type: 3,
             name: "player-tag",
-            description: "Input player tag to search"
+            description: "Input player tag (e.g.: #PVQ2UYCPC)",
+            required: true,
         }]
     },
     async execute(i) {
@@ -23,7 +24,7 @@ module.exports = {
             await i.editReply({
                 embeds: [
                     embed.setColor("Red")
-                        .setDescription("Please input **player-tag** to search!")]
+                        .setDescription(`Please input **player-tag** to search! (e.g.: \`${i.config.Prefix}player #PVQ2UYCPC\``)]
             });
             return;
         }

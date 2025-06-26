@@ -10,7 +10,8 @@ module.exports = {
         options: [{
             type: 3,
             name: "clan-tag",
-            description: "Input clan tag to search"
+            description: "Input clan tag (e.g.: #2Q082JYVY)",
+            required: true,
         }]
     },
     async execute(i) {
@@ -23,7 +24,7 @@ module.exports = {
             await i.editReply({
                 embeds: [
                     embed.setColor("Red")
-                        .setDescription(`Please input **clan-tag** to search!`)]
+                        .setDescription(`Please input **clan-tag** to search! (e.g.: \`${i.config.Prefix}clan #2Q082JYVY\`)`)]
             });
             return;
         }
