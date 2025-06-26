@@ -24,7 +24,7 @@ module.exports = {
             await i.editReply({
                 embeds: [
                     embed.setColor("Red")
-                        .setDescription(`Please input **player-tag** to search! (e.g.: \`${i.config.Prefix}player #PVQ2UYCPC\``)]
+                        .setDescription(`Please input **player-tag** to search! (e.g.: \`${i.config.Prefix}player #PVQ2UYCPC\`)`)]
             });
             return;
         }
