@@ -6,7 +6,7 @@ module.exports = (clan) => {
         .setColor(Color)
         .setTitle(clan.name)
         .setURL(clan.shareLink)
-        .setDescription(clan.description+"\n\n"+clan.labels.map(l => Emojis[l.name]).join(" "))
+        .setDescription(clan.description+"\n\n"+clan.labels.map(l => Emojis[l.name.replaceAll(" ", "")]).join(" "))
         .setThumbnail(clan.badge.url)
         .addFields(
             { name: "Leader", value: clan.members.find(member => member.role == "leader").name, inline: false },
