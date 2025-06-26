@@ -56,7 +56,7 @@ module.exports = {
         ];
         
         if (!player.clan) buttons[0].setStyle(ButtonStyle.Secondary).setDisabled(true);
-        else button[0].setCustomId("clan_"+player.clan.tag);
+        else buttons[0].setCustomId("clan_"+player.clan.tag);
         
         await i.editReply({ embeds: [playerEmbed], components: [new ActionRowBuilder().addComponents(buttons)] });
         return;
