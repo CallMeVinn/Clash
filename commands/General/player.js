@@ -1,5 +1,5 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, MessageFlags } = require("discord.js");
-const { Util } = require("clashofclans.js")
+const { Util } = require("clashofclans.js");
 
 module.exports = {
     data: {
@@ -39,31 +39,26 @@ module.exports = {
         }
         
         const player = await i.coc.getPlayer(query);
-
-        embed.setColor(i.config.Color)
-            .setTitle(player.name)
-            .setURL(player.shareLink)
-            .setThumbnail(player.league.icon.url)
-            .addFields(
-                { name: 'Clan', value: player.clan ? player.clan.name : "`No Clan`" },
-                { name: 'Level', value: `${player.expLevel}`, inline: false },
-                { name: 'Town Hall', value: `${player.townHallLevel}`, inline: false },
-                { name: 'Trophies', value: `${player.trophies}`, inline: false },
-                { name: 'Best Trophies', value: `${player.bestTrophies}`, inline: false },
-                /*{ name: 'Donations', value: `${player.donations}`, inline: false },
-                { name: 'Donations Received', value: `${player.received}`, inline: false },*/
-                { name: 'War Stars', value: `${player.warStars}`, inline: true },
-                { name: 'Attack - Defense', value: `${player.attackWins} - ${player.defenseWins}`, inline: false }
-            );
+        const playerEmbed = require("../../embeds/Player.js")(player);
         
         const buttons = [
             new ButtonBuilder()
+                .setCustomId("player_clan")
+                .setLabel("Clan")
+                .setStyle(ButtonStyle.Primary),
+            new ButtonBuilder()
                 .setCustomId("player_troops")
                 .setLabel("Troops")
-                .setStyle(ButtonStyle.Primary)
+                .setStyle(ButtonStyle.Primary),
+            new ButtonBuilder()
+                .setCustomId("player_heroes")
+                .setLabel("Heroes")
+                .setStyle(ButtonStyle.Primary),
         ];
         
-        await i.editReply({ embeds: [embed], components: [new ActionRowBuilder().addComponents(buttons)] });
+        if (!player.clan) buttons[0].setStyle(ButtonStyle.Secondary).setDisabled(true);
+        
+        await i.editReply({ embeds: [playerEmbed], components: [new ActionRowBuilder().addComponents(buttons)] });
         return;
     }
 }

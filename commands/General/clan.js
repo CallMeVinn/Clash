@@ -39,21 +39,7 @@ module.exports = {
         }
         
         const clan = await i.coc.getClan(query);
-
-        embed.setColor(i.config.Color)
-            .setTitle(clan.name)
-            .setURL(clan.shareLink)
-            .setDescription(clan.description)
-            .setThumbnail(clan.badge.url)
-            .addFields(
-                { name: "Leader", value: clan.members.find(member => member.role == "leader").name, inline: false },
-                { name: 'Members', value: `${clan.memberCount}`, inline: false },
-                { name: 'Location', value: `${clan.location?.name ?? 'Not Set'}`, inline: false },
-                { name: 'Trophies', value: `${clan.points}`, inline: false },
-                { name: 'Builder Trophies', value: `${clan.builderBasePoints}`, inline: true },
-                { name: 'Clan War League', value: `${clan.warLeague?.name ?? 'No League'}`, inline: true },
-                { name: 'Chat Language', value: `${clan.chatLanguage?.name ?? 'Not Set'}`, inline: true }
-            );
+        const clanEmbed = require("../../embeds/Clan.js")(clan);
         
         const buttons = [
             new ButtonBuilder()
@@ -62,7 +48,7 @@ module.exports = {
                 .setStyle(ButtonStyle.Primary)
         ];
         
-        await i.editReply({ embeds: [embed], components: [new ActionRowBuilder().addComponents(buttons)] });
+        await i.editReply({ embeds: [clanEmbed], components: [new ActionRowBuilder().addComponents(buttons)] });
         return;
     }
 }
