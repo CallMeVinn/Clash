@@ -1,3 +1,5 @@
+const { EmbedBuilder } = require("discord.js");
+
 module.exports = {
     data: {
         type: 1,
@@ -9,7 +11,7 @@ module.exports = {
         
         const timestamp = await Date.now();
         
-        await i.editReply(`Pong! **${timestamp - i.createdTimestamp}** ms`);
+        await i.editReply({ embeds: [new EmbedBuilder().setColor(i.config.Color).setDescription(`Pong! **${timestamp - i.createdTimestamp}** ms`)] });
         return;
     }
 }
