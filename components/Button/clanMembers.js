@@ -5,7 +5,7 @@ module.exports = {
     async execute(client, interaction) {
         const args = interaction.customId.split("_");
         
-        const clanTag = args[0].replace("clan", "");
+        const clanTag = args[0].replace("clanMembers", "");
         const authorId = args[1];
         
         if (interaction.user.id !== authorId) return interaction.reply({ content: "This button is not for you!", flags: [MessageFlags.Ephemeral] });
