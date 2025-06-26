@@ -43,7 +43,7 @@ module.exports = {
         
         const buttons = [
             new ButtonBuilder()
-                .setCustomId("clan_members")
+                .setCustomId("clanMembers"+clan.tag)
                 .setLabel("Members")
                 .setStyle(ButtonStyle.Primary)
         ];

@@ -35,7 +35,7 @@ module.exports = async(client, interaction) => {
 }
 
 async function componentExecute(client, interaction) {
-    const componen = client.components.get(interaction.customId);
+    const componen = client.components.get(interaction.customId) || client.components.find(c => interaction.customId.startsWith(c.customId));
     
     if (!componen) {
         // Auto complete
