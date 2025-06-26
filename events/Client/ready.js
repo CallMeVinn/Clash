@@ -6,7 +6,5 @@ module.exports = async(client) => {
     const app = await client.application.fetch();
     const emoji = await app.emojis.fetch();
     
-    client.emojis = {};
-    
-    emoji.forEach(e => (client.emojis[e.name] = e.toString()));
+    emoji.forEach(e => (client.config.Emojis[e.name] = e.toString()));
 }

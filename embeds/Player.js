@@ -1,13 +1,12 @@
 const { EmbedBuilder } = require("discord.js");
 const { Color } = require("../config.js");
-const client = require("../");
 
 module.exports = (player) => {
     return new EmbedBuilder()
         .setColor(Color)
         .setTitle(player.name)
         .setURL(player.shareLink)
-        .setDescription(player.labels.map(l => client.emojis[l]).join(" "))
+        .setDescription(player.labels.map(l => Emojis[l]).join(" "))
         .setThumbnail(player.league.icon.url)
         .addFields(
             { name: 'Clan', value: player.clan ? player.clan.name : "`-`" },
