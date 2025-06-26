@@ -1,12 +1,13 @@
 const { EmbedBuilder } = require("discord.js");
 const { Color } = require("../config.js");
+const client = require("../");
 
 module.exports = (clan) => {
     return new EmbedBuilder()
         .setColor(Color)
         .setTitle(clan.name)
         .setURL(clan.shareLink)
-        .setDescription(clan.description)
+        .setDescription(clan.description+"\n\n"+clan.labels.map(l => client.emojis[l]).join(" "))
         .setThumbnail(clan.badge.url)
         .addFields(
             { name: "Leader", value: clan.members.find(member => member.role == "leader").name, inline: false },

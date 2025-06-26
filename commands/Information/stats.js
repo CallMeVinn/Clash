@@ -1,5 +1,5 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, EmbedBuilder, MessageFlags } = require("discord.js");
-const { version } = require("../../package.json");
+const { description, version } = require("../../package.json");
 
 const os = require("node:os");
 const bs = require("byte-size");
@@ -17,6 +17,7 @@ module.exports = {
         const botInfoEmbed = new EmbedBuilder()
             .setColor(i.config.Color)
             .setTitle(i.client.user.username+"'s Bot Information")
+            .setDescription(description)
             .setThumbnail(i.client.user.displayAvatarURL({ size: 1024, forceStatic: true }))
             .addFields(
                 { name: "Version", value: version, inline: true },
