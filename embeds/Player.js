@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-const { Color } = require("../config.js");
+const { Color, Emojis } = require("../config.js");
 
 module.exports = (player) => {
     return new EmbedBuilder()
