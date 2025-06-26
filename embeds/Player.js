@@ -6,7 +6,7 @@ module.exports = (player) => {
         .setColor(Color)
         .setTitle(player.name)
         .setURL(player.shareLink)
-        .setDescription(player.labels.map(l => Emojis[l]).join(" "))
+        .setDescription(player.labels.map(l => Emojis[l.name]).join(" "))
         .setThumbnail(player.league.icon.url)
         .addFields(
             { name: 'Clan', value: player.clan ? player.clan.name : "`-`" },
