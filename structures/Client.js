@@ -1,5 +1,6 @@
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const { Client: ClashClient } = require("clashofclans.js");
+const { QuickMongoClient } = require("quick-mongo-super");
 
 class BotClient extends Client {
     constructor(...args) {
@@ -30,6 +31,8 @@ class BotClient extends Client {
         this.collect = new Collection();
         
         this.config = require("../config.js");
+        
+        this.db = new QuickMongoClient(this.config.MongoUri);
     }
     
     async start() {
