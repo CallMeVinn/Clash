@@ -17,6 +17,7 @@ class CommandInterface {
         this.client = data.client;
         this.config = data.client.config;
         this.coc = data.client.coc;
+        this.db = data.client.db;
         
         this.setArgs(args);
     }
