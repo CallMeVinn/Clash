@@ -71,7 +71,7 @@ async function sendIntro(client, interaction) {
     const embed = new EmbedBuilder()
         .setColor(client.config.Color)
         .setTitle("Introduction")
-        .setDescription(`## Welcome, Chief!\nThanks for using **${client.user.username}**'s bot service!\n### ⚠️ Please Note: This bot is unofficial and not affiliated with **Supercell**. It was made by fans, for fans community.\n> This project follows the **Supercell Fan Content Policy**. We do not claim ownership of any trademarks, characters, or assets owned by **Supercell**. Full policy: https://supercell.com/en/fan-content-policy/`)
+        .setDescription(`## Welcome, Chief!\nThanks for using **${client.user.username}**'s bot service!\n### Important!\nThis bot is unofficial and not affiliated with **Supercell**. It was made by fans, for fans community.\n> This project follows the **Supercell Fan Content Policy**. We do not claim ownership of any trademarks, characters, or assets owned by **Supercell**.\n Full policy: https://supercell.com/en/fan-content-policy/`)
         .addFields({
             name: "Basic of Usage",
             value: "/clan : Sending clan information of CoC game\n/player : Sending player information of CoC game\n/help : Sending all commands list and this help to get you started.",
