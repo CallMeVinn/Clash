@@ -69,7 +69,7 @@ class Database extends QuickDB {
         await this.delete("WriteTest");
         deleteLatency = Date.now() - deleteLatencyStart;
             
-        return { readLatency, writeLatency, deleteLatency, };
+        return { latency: readLatency+writeLatency+deleteLatency, readLatency, writeLatency, deleteLatency };
     }
 }
 
