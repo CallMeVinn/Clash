@@ -7,6 +7,7 @@
         "start": "node ."
     },
     "dependencies": {
+        "@heroui/react": "^2.7.11",
         "byte-size": "^9.0.1",
         "canvacord": "^6.0.2",
         "clashofclans.js": "^3.3.22",
