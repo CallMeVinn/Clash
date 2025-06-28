@@ -10,7 +10,7 @@ module.exports = {
         options: [{
             type: 3,
             name: "player-tag",
-            description: "Input player tag (e.g.: #PVQ2UYCPC)",
+            description: "Input player tag! (e.g.: #PVQ2UYCPC)",
             required: true,
         }]
     },
@@ -24,7 +24,7 @@ module.exports = {
             await i.editReply({
                 embeds: [
                     embed.setColor("Red")
-                        .setDescription(`Please input **player-tag** to search! (e.g.: \`${i.config.Prefix}player #PVQ2UYCPC\`)`)]
+                        .setDescription(`Please input \`player-tag\` to search! (e.g.: \`${i.config.Prefix}player #PVQ2UYCPC\`)`)]
             });
             return;
         }
@@ -33,12 +33,24 @@ module.exports = {
             i.editReply({
                 embeds: [
                     embed.setColor("Red")
-                        .setDescription(`\`${query}\` is not valid **player-tag**!`)]
+                        .setDescription(`\`${query}\` is not valid \`player-tag\`!`)]
             });
             return;
         }
         
         const player = await i.coc.getPlayer(query);
+        
+        if (!player) {
+            i.editReply({
+                embeds: [
+                    embed.setColor("Red")
+                        .setDescription(`Failed to find player using tag\`${query}\`!`)
+                ],
+                flags: [MessageFlags.Ephemeral],
+            });
+            return;
+        }
+        
         const playerEmbed = require("../../embeds/Player.js")(player);
         
         const buttons = [
@@ -56,7 +68,7 @@ module.exports = {
         ];
         
         if (!player.clan) buttons[0].setStyle(ButtonStyle.Secondary).setDisabled(true);
-        else buttons[0].setCustomId("clan"+player.clan.tag+"_"+i.author.id);
+        else buttons[0].setCustomId("clan_"+player.clan.tag);
         
         await i.editReply({ embeds: [playerEmbed], components: [new ActionRowBuilder().addComponents(buttons)] });
         return;

@@ -15,6 +15,6 @@ module.exports = (player) => {
             { name: 'Trophies', value: `${player.trophies}`, inline: true },
             { name: 'Best Trophies', value: `${player.bestTrophies}`, inline: true },
             { name: 'War Stars', value: `${player.warStars}`, inline: false },
-            { name: 'Attack - Defense', value: `${player.attackWins} Win - ${player.defenseWins} Win`, inline: false }
+            { name: 'Attack - Defense', value: `${player.attackWins} Win | ${player.defenseWins} Win`, inline: false }
         );
 }

@@ -10,7 +10,7 @@ module.exports = {
         options: [{
             type: 3,
             name: "clan-tag",
-            description: "Input clan tag (e.g.: #2Q082JYVY)",
+            description: "Input clan tag! (e.g.: #2Q082JYVY)",
             required: true,
         }]
     },
@@ -33,17 +33,29 @@ module.exports = {
             await i.editReply({
                 embeds: [
                     embed.setColor("Red")
-                        .setDescription(`\`${query}\` is not valid **clan-tag**!`)]
+                        .setDescription(`\`${query}\` is not valid \`clan-tag\`!`)]
             });
             return;
         }
         
-        const clan = await i.coc.getClan(query);
+        const clan = await i.coc.getClan(query).catch(_=>void 0);
+        
+        if (!clan) {
+            i.editReply({
+                embeds: [
+                    embed.setColor("Red")
+                        .setDescription(`Failed to find clan using tag \`${query}\`!`)
+                ],
+                flags: [MessageFlags.Ephemeral],
+            });
+            return;
+        }
+        
         const clanEmbed = require("../../embeds/Clan.js")(clan);
         
         const buttons = [
             new ButtonBuilder()
-                .setCustomId("clanMembers"+clan.tag+"_"+i.author.id)
+                .setCustomId("clanMembers_"+clan.tag)
                 .setLabel("Members")
                 .setStyle(ButtonStyle.Primary)
         ];
