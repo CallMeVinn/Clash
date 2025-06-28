@@ -1,5 +1,5 @@
 const { QuickMongo } = require("quick-mongo-super");
-const Database = require("../../structures/Database.js");
+const Database = require("../structures/Database.js");
 
 module.exports = async(client) => {
     const database = new Database();
