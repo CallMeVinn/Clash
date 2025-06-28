@@ -3,8 +3,8 @@ const CommandInterface = require("../../structures/CommandInterface.js");
 
 module.exports = async(client, interaction) => {
     
-    await setupUsers(client, interaction.userId);
-    await setupGuilds(client, interaction.guildId);
+    await setupUsers(client, interaction.user.id);
+    await setupGuilds(client, interaction.guild.id);
 
     if (interaction.isAutocomplete() || interaction.isButton() || interaction.isModalSubmit() || interaction.isStringSelectMenu()) return await componentExecute(client, interaction);
     
