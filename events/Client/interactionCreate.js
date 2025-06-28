@@ -89,7 +89,7 @@ async function sendIntro(client, interaction) {
 
 async function setupUsers(client, userId) {
     const data = client.pg.users;
-    if (!(await data.has(userId))) {
+    if (!(await data.get(userId))) {
         await data.set(userId, {});
     };
     return;
@@ -97,7 +97,7 @@ async function setupUsers(client, userId) {
 
 async function setupGuilds(client, guildId) {
     const data = client.pg.guilds;
-    if (!(await data.has(guildId))) {
+    if (!(await data.get(guildId))) {
         await data.set(guildId, {});
     };
     return;
