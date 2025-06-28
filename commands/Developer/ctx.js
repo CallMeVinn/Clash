@@ -15,7 +15,7 @@ module.exports = {
         await i.deferReply();
         
         const pl = await i.coc.getPlayer("#PVQ2UYCPC");
-        const pasukan = p.troops.map(t=>t.level);
+        const pasukan = pl.troops.map(t=>t.level);
         const cols = 5;
   const cellSize = 128;
   const padding = 20;
