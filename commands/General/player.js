@@ -38,7 +38,7 @@ module.exports = {
             return;
         }
         
-        const player = await i.coc.getPlayer(query);
+        const player = await i.coc.getPlayer(query).catch(_ => void 0);
         
         if (!player) {
             i.editReply({
