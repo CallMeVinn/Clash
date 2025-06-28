@@ -49,8 +49,8 @@ class Database extends QuickDB {
             })
             .catch(error => console.log("[Database:PostgreSQL] Can't connect!", error));
             
-            this.guilds = this.table("guilds");
-            this.users = this.table("users");
+            this.guilds = super.table("guilds");
+            this.users = super.table("users");
     }
     async ping() {
         let readLatency = -1;
