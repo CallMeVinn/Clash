@@ -40,7 +40,7 @@ cjDWw56qu+dEsUmHj90jLi6SH8jmsHux4c+Bm142RH7Ad0lwB7SItMWnUp4F86B2
 
 class Database extends QuickDB {
     constructor(client) {
-        super({ driver: postgresDriver });
+        super({ driver: postgresDriver, table: "client" });
         
         postgresDriver.connect()
             .then(async() => {
