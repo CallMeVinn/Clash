@@ -48,6 +48,9 @@ class Database extends QuickDB {
                 console.log("[Database:PostgreSQL] Connected. ✅", `Read: ${ping?.readLatency}ms | Write: ${ping?.writeLatency}ms | Delete: ${ping?.deleteLatency}ms`)
             })
             .catch(error => console.log("[Database:PostgreSQL] Can't connect!", error));
+            
+            this.guilds = this.table("guilds");
+            this.users = this.table("users");
     }
     async ping() {
         let readLatency = -1;

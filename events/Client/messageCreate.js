@@ -4,6 +4,9 @@ const CommandInterface = require("../../structures/CommandInterface.js");
 module.exports = async (client, message) => {
     if (message.author.bot || !message.guild) return;
 
+    await setupUsers(client, message.author.id);
+    await setupGuilds(client, message.guild.id);
+
     const botPermissions = ["ViewChannel", "SendMessages", "EmbedLinks"];
     const missingPermissions = [];
 
@@ -62,9 +65,10 @@ module.exports = async (client, message) => {
 }
 
 async function sendIntro(client, message) {
-    const data = await client.pg.get("introduced_users");
+    const database = client.pg.users;
+    const data = await database.get(message.author.id);
     
-    if (data.includes(message.author.id)) return;
+    if (data?.introduced) return;
     
     const embed = new EmbedBuilder()
         .setColor(client.config.Color)
@@ -81,6 +85,22 @@ async function sendIntro(client, message) {
     
     message.channel.send({ embeds: [embed] });
     
-    await client.pg.push("introduced_users", message.author.id);
+    await database.set(`${message.author.id}.introduced`, true);
+    return;
+}
+
+async function setupUsers(client, userId) {
+    const data = client.pg.users;
+    if (!(await data.has(userId))) {
+        await data.set(userId, {});
+    };
+    return;
+}
+
+async function setupGuilds(client, guildId) {
+    const data = client.pg.guilds;
+    if (!(await data.has(guildId))) {
+        await data.set(guildId, {});
+    };
     return;
 }

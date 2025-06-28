@@ -2,6 +2,10 @@ const { EmbedBuilder } = require("discord.js");
 const CommandInterface = require("../../structures/CommandInterface.js");
 
 module.exports = async(client, interaction) => {
+    
+    await setupUsers(client, interaction.userId);
+    await setupGuilds(client, interaction.guildId);
+
     if (interaction.isAutocomplete() || interaction.isButton() || interaction.isModalSubmit() || interaction.isStringSelectMenu()) return await componentExecute(client, interaction);
     
     if (interaction.isMessageContextMenuCommand() || interaction.isUserContextMenuCommand()) return await contextMenuExecute(client, interaction);
@@ -60,9 +64,9 @@ async function contextMenuExecute(client, interaction) {
 }
 
 async function sendIntro(client, interaction) {
-    const data = await client.pg.get("introduced_users");
+    const data = client.pg.users.get(interaction.user.id)
     
-    if (data.includes(interaction.user.id)) return;
+    if (data.introduced) return;
     
     const embed = new EmbedBuilder()
         .setColor(client.config.Color)
@@ -79,6 +83,22 @@ async function sendIntro(client, interaction) {
     
     interaction.channel.send({ embeds: [embed] });
     
-    await client.pg.push("introduced_users", interaction.user.id);
+    await client.pg.users.set(`${interaction.user.id}.introduced`, true);
+    return;
+}
+
+async function setupUsers(client, userId) {
+    const data = client.pg.users;
+    if (!(await data.has(userId))) {
+        await data.set(userId, {});
+    };
+    return;
+}
+
+async function setupGuilds(client, guildId) {
+    const data = client.pg.guilds;
+    if (!(await data.has(guildId))) {
+        await data.set(guildId, {});
+    };
     return;
 }
