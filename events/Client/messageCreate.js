@@ -61,7 +61,7 @@ module.exports = async (client, message) => {
     if (!command.private) client.pg.add(`command_used.${command.data.name}`, 1);
 }
 
-await function sendIntro(client, message) {
+async function sendIntro(client, message) {
     const data = await client.pg.get("introduced_users");
     
     if (data.includes(message.author.id)) return;
