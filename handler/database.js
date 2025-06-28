@@ -5,6 +5,9 @@ module.exports = async(client) => {
     client.pg = new Database();
     client.pg.init();
     
+    client.pg.guilds = client.pg.table("guilds")
+    client.pg.users = client.pg.table("users");
+    
     client.db.on("connect", async() => {
         client.db = new QuickMongo(client.db, { name: "Clash" });
         

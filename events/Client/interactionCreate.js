@@ -66,7 +66,7 @@ async function contextMenuExecute(client, interaction) {
 async function sendIntro(client, interaction) {
     const data = client.pg.users.get(interaction.user.id)
     
-    if (data.introduced) return;
+    if (data?.introduced) return;
     
     const embed = new EmbedBuilder()
         .setColor(client.config.Color)
