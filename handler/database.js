@@ -2,7 +2,8 @@ const { QuickMongo } = require("quick-mongo-super");
 const Database = require("../structures/Database.js");
 
 module.exports = async(client) => {
-    const database = new Database();
+    client.pg = new Database();
+    client.pg.init();
     
     client.db.on("connect", async() => {
         client.db = new QuickMongo(client.db, { name: "Clash" });
@@ -14,5 +15,4 @@ module.exports = async(client) => {
     client.db.on("disconnect", () => console.log("[Database] Disconnected. ⚠️"));
     
     await client.db.connect();
-    await database.init();
 }
