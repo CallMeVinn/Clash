@@ -61,8 +61,8 @@ ctx.shadowColor = 'transparent'; // Reset shadow
 
     if (level > 0) {
       let color = '#0077ff';
-      if (level >= 9) color = '#ffaa00';
-      if (level <= 3) color = '#ff0044';
+      if (level == pl.troops.map(t=>t.maxLevel)[i]) color = '#ffaa00';
+      //if (level <= 3) color = '#ff0044';
 
       // Level circle
 ctx.beginPath();
