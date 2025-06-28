@@ -59,7 +59,7 @@ async function contextMenuExecute(client, interaction) {
     return;
 }
 
-await function sendIntro(client, interaction) {
+async function sendIntro(client, interaction) {
     const data = await client.pg.get("introduced_users");
     
     if (data.includes(interaction.user.id)) return;
