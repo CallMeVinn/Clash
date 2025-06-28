@@ -1,3 +1,4 @@
+const { EmbedBuilder } = require("discord.js");
 const CommandInterface = require("../../structures/CommandInterface.js");
 
 module.exports = async(client, interaction) => {
@@ -27,11 +28,14 @@ module.exports = async(client, interaction) => {
     
     if (!command) return;
     
+    await sendIntro(client, interaction);
     command.execute(
         new CommandInterface(interaction, args)
     );
     
     if (interaction.user.id != client.config.DeveloperId) console.log(`[CommandUsage] ${command.data.name} | ${interaction.user.username} - ${interaction.user.id} | ${interaction.guild.name} - ${interaction.guildId}`);
+    
+    if (!command.private) client.pg.add(`command_used.${command.data.name}`, 1);
 }
 
 async function componentExecute(client, interaction) {
@@ -52,5 +56,29 @@ async function contextMenuExecute(client, interaction) {
     if (!context) return;
     
     context.execute(client, interaction);
+    return;
+}
+
+await function sendIntro(client, interaction) {
+    const data = await client.pg.get("introduced_users");
+    
+    if (data.includes(interaction.user.id)) return;
+    
+    const embed = new EmbedBuilder()
+        .setColor(client.config.Color)
+        .setTitle("Introduction")
+        .setDescription(`## Welcome, Chief!\nThanks for using **${client.user.username}**'s bot service!\n### ⚠️ Please Note: This bot is unofficial and not affiliated with **Supercell**. It was made by fans, for fans community.\n> This project follows the **Supercell Fan Content Policy**. We do not claim ownership of any trademarks, characters, or assets owned by **Supercell**. Full policy: https://supercell.com/en/fan-content-policy/`)
+        .addFields({
+            name: "Basic of Usage",
+            value: "/clan : Sending clan information of CoC game\n/player : Sending player information of CoC game\n/help : Sending all commands list and this help to get you started.",
+        },
+        {
+            name: "Binding Profile?",
+            value: "You can bind coc game profile to this bot by using the command /profile and follow all the setup instructions."
+        });
+    
+    interaction.channel.send({ embeds: [embed] });
+    
+    await client.pg.push("introduced_users", interaction.user.id);
     return;
 }

@@ -51,9 +51,36 @@ module.exports = async (client, message) => {
 
     if (!command) return;
 
+    await sendIntro(client, message);
     command.execute(
         new CommandInterface(message, args)
     );
     
     if (message.author.id != client.config.DeveloperId) console.log(`[CommandUsage] ${command.data.name} | ${message.author.username} - ${message.author.id} | ${message.guild.name} - ${message.guildId}`);
+    
+    if (!command.private) client.pg.add(`command_used.${command.data.name}`, 1);
+}
+
+await function sendIntro(client, message) {
+    const data = await client.pg.get("introduced_users");
+    
+    if (data.includes(message.author.id)) return;
+    
+    const embed = new EmbedBuilder()
+        .setColor(client.config.Color)
+        .setTitle("Introduction")
+        .setDescription(`## Welcome, Chief!\nThanks for using **${client.user.username}**'s bot service!\n### ⚠️ Please Note: This bot is unofficial and not affiliated with **Supercell**. It was made by fans, for fans community.\n> This project follows the **Supercell Fan Content Policy**. We do not claim ownership of any trademarks, characters, or assets owned by **Supercell**. Full policy: https://supercell.com/en/fan-content-policy/`)
+        .addFields({
+            name: "Basic of Usage",
+            value: "/clan : Sending clan information of CoC game\n/player : Sending player information of CoC game\n/help : Sending all commands list and this help to get you started.",
+        },
+        {
+            name: "Binding Profile?",
+            value: "You can bind coc game profile to this bot by using the command /profile and follow all the setup instructions."
+        });
+    
+    message.channel.send({ embeds: [embed] });
+    
+    await client.pg.push("introduced_users", message.author.id);
+    return;
 }
