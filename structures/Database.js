@@ -44,33 +44,31 @@ class Database extends QuickDB {
         
         postgresDriver.connect()
             .then(async() => {
-                console.log("[Database:PostgreSQL] Connected. ✅", `Read: ${await this.ping?.readLatency}ms | Write: ${await this.ping?.writeLatency}ms | Delete: ${await this.ping?.deleteLatency}ms`)
+                console.log("[Database:PostgreSQL] Connected. ✅", `Read: ${await this.ping()?.readLatency}ms | Write: ${await this.ping()?.writeLatency}ms | Delete: ${await this.ping()?.deleteLatency}ms`)
             })
             .catch(error => console.log("[Database:PostgreSQL] Can't connect!", error));
     }
-    get ping() {
-        return (async() => {
-            let readLatency = -1;
-            let writeLatency = -1;
-            let deleteLatency = -1;
-            
-            const readLatencyStart = await Date.now();
-            
-            await this.all();
-            readLatency = Date.now() - readLatencyStart;
-            
-            const writeLatencyStart = await Date.now();
+    async ping() {
+        let readLatency = -1;
+        let writeLatency = -1;
+        let deleteLatency = -1;
         
-            await this.set("WriteTest", { type: "test", message: "This Work?" });
-            writeLatency = Date.now() - writeLatencyStart;
+        const readLatencyStart = await Date.now();
+        
+        await this.all();
+        readLatency = Date.now() - readLatencyStart;
+        
+        const writeLatencyStart = await Date.now();
+        
+        await this.set("WriteTest", { type: "test", message: "This Work?" });
+        writeLatency = Date.now() - writeLatencyStart;
+        
+        const deleteLatencyStart = await Date.now();
             
-            const deleteLatencyStart = await Date.now();
+        await this.delete("WriteTest");
+        deleteLatency = Date.now() - deleteLatencyStart;
             
-            await this.delete("WriteTest");
-            deleteLatency = Date.now() - deleteLatencyStart;
-            
-            return { readLatency, writeLatency, deleteLatency, };
-        });
+        return { readLatency, writeLatency, deleteLatency, };
     }
 }
 
