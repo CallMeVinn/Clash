@@ -2,14 +2,7 @@ const { createCanvas, loadImage } = require('@napi-rs/canvas');
 
 const imageUrl = 'https://cdn.discordapp.com/emojis/873631287791997008.png';
 
-const pasukan = [
-  9, 9, 9, 8, 8,
-  8, 9, 5, 8, 8,
-  6, 6, 4, 2, 0,
-  0, 0, 8, 10, 8,
-  9, 5, 6, 4, 5,
-  3, 0
-];
+const troops = require("../../@assets/json/troops.json");
 
 module.exports = {
     data: {
@@ -19,7 +12,10 @@ module.exports = {
     },
     private: true,
     async execute(i) {
-        await i.deferReply()
+        await i.deferReply();
+        
+        const pl = await i.coc.getPlayer("#PVQ2UYCPC");
+        const pasukan = p.troops.map(t=>t.level);
         const cols = 5;
   const cellSize = 128;
   const padding = 20;
@@ -35,7 +31,7 @@ module.exports = {
 
   const img = await loadImage(imageUrl);
 
-  for (let i = 0; i < pasukan.length; i++) {
+  for (let i = 0; i < troops.length; i++) {
     const level = pasukan[i];
     const row = Math.floor(i / cols);
     const col = i % cols;
