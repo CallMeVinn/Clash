@@ -7,9 +7,8 @@
         "start": "node ."
     },
     "dependencies": {
-        "@heroui/react": "^2.7.11",
+        "@napi-rs/canvas": "^0.1.72",
         "byte-size": "^9.0.1",
-        "canvacord": "^6.0.2",
         "clashofclans.js": "^3.3.22",
         "discord.js": "^14.20.0",
         "dreamvast.quick.db": "^10.0.0-unsupported",
