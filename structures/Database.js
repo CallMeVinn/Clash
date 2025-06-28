@@ -6,7 +6,7 @@ const postgresDriver = new PostgresDriver({
     password: process.env.PgPassword || "",
     host: process.env.PgHost || "",
     port: 24014,
-    database: "dev",
+    database: "defaultdb",
     ssl: {
         rejectUnauthorized: true,
         ca: `-----BEGIN CERTIFICATE-----
