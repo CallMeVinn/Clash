@@ -44,7 +44,8 @@ class Database extends QuickDB {
         
         postgresDriver.connect()
             .then(async() => {
-                console.log("[Database:PostgreSQL] Connected. ✅", `Read: ${await this.ping()?.readLatency}ms | Write: ${await this.ping()?.writeLatency}ms | Delete: ${await this.ping()?.deleteLatency}ms`)
+                const ping = await this.ping();
+                console.log("[Database:PostgreSQL] Connected. ✅", `Read: ${ping?.readLatency}ms | Write: ${ping?.writeLatency}ms | Delete: ${ping?.deleteLatency}ms`)
             })
             .catch(error => console.log("[Database:PostgreSQL] Can't connect!", error));
     }
